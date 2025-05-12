@@ -54,7 +54,7 @@ export default function Home() {
       const data = await response.json();
       setCurrentQuestion(data);
     } catch (error) {
-      console.error("Error fetching questio 2n:", error);
+      console.error("Error fetching questio 2an:", error);
     }
   };
 
