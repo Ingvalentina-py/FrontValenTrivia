@@ -27,7 +27,8 @@ export default function Home() {
       })
 
       const data = await response.json()
-      setUserId(data.userId)
+      console.log("User saved:", data)
+      setUserId(data.user._id)
       setUserName(name)
       setGameState("category")
     } catch (error) {
@@ -54,6 +55,7 @@ export default function Home() {
   const handleAnswerQuestion = async (questionText, selectedAnswer, isCorrect) => {
     try {
       // Save question to backend
+      console.log(questionText, selectedAnswer, isCorrect, userId)
       await fetch("http://localhost:5000/save-question", {
         method: "POST",
         headers: {
@@ -61,7 +63,7 @@ export default function Home() {
         },
         body: JSON.stringify({
           userId,
-          questionText,
+          questionText: questionText.questionText,
           questionIsTrue: isCorrect,
         }),
       })

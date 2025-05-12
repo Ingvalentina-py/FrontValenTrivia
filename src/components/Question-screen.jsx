@@ -7,7 +7,7 @@ export default function QuestionScreen({ question, questionNumber, onAnswerSelec
   const [selectedOption, setSelectedOption] = useState(null)
   const [isAnswered, setIsAnswered] = useState(false)
   const [timeLeft, setTimeLeft] = useState(30)
-
+  
   useEffect(() => {
     // Reset state when question changes
     setSelectedOption(null)
@@ -41,7 +41,7 @@ export default function QuestionScreen({ question, questionNumber, onAnswerSelec
 
     // Wait 1.5 seconds before moving to next question
     setTimeout(() => {
-      onAnswerSelected(question.text, option, isCorrect)
+      onAnswerSelected(question, option, isCorrect)
     }, 1500)
   }
 
@@ -59,12 +59,13 @@ export default function QuestionScreen({ question, questionNumber, onAnswerSelec
           </span>
         </div>
 
-        <h2 className="text-xl font-bold text-gray-800 mb-6">{question.text}</h2>
+        <h2 className="text-xl font-bold text-gray-800 mb-6">{question.questionText}</h2>
 
         <div className="space-y-3">
           {question.options.map((option, index) => {
-            const isCorrect = option === question.correctAnswer
-            const isSelected = selectedOption === option
+            const isCorrect = option.is_correct
+            const isSelected = selectedOption?.text === option.text
+
 
             let optionClass = "border border-gray-200 p-4 rounded-lg transition-all duration-300 "
 
@@ -85,7 +86,7 @@ export default function QuestionScreen({ question, questionNumber, onAnswerSelec
                 onClick={() => !isAnswered && handleSelectOption(option, isCorrect)}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-800">{option}</span>
+                  <span className="text-gray-800">{option.text}</span>
                   {isAnswered && (
                     <>
                       {isCorrect ? (

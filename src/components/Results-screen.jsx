@@ -47,8 +47,8 @@ export default function ResultsScreen({ answeredQuestions, userName, onPlayAgain
             <tbody className="divide-y divide-gray-200">
               {answeredQuestions.map((q, index) => (
                 <tr key={index} className={q.isCorrect ? "bg-green-50" : "bg-red-50"}>
-                  <td className="py-3 px-4 text-sm text-gray-800">{q.question}</td>
-                  <td className="py-3 px-4 text-sm text-gray-800">{q.selectedAnswer}</td>
+<td className="py-3 px-4 text-sm text-gray-800">{q.question?.questionText}</td>
+                  <td className="py-3 px-4 text-sm text-gray-800">{q.selectedAnswer?.text}</td>
                   <td className="py-3 px-4 text-center">
                     {q.isCorrect ? (
                       <CheckCircle className="h-5 w-5 text-green-600 mx-auto" />
